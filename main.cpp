@@ -4,6 +4,7 @@
 
 using namespace std;
 
+int field_size = 100;
 int speed = 2;
 int seconds_to_load = 10;
 int start_ind = 0;
@@ -90,7 +91,7 @@ vector<vector<float>> create_time_cost_matrix(vector<vector<int>>& route) {
 vector<vector<int>> create_route(vector<vector<int>>& points) {
     
     vector<int> start = {0, 0, 0};
-    vector<int> finish = {100, 100, 0};
+    vector<int> finish = {field_size, field_size, 0};
     vector<vector<int>> route;
     
     route.push_back(start);
