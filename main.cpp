@@ -36,7 +36,7 @@ int get_closest_neighbour(vector<float> time_distances, vector<bool> visited) {
 vector<float> dijkstra_search(vector<vector<float>>& time_cost_matrix, int start) {
 
     vector<bool> visited (time_cost_matrix.size(), false);
-    vector<float> time_distances (time_cost_matrix.size(), 999.0);
+    vector<float> time_distances (time_cost_matrix.size(), max_fill_value);
     vector<int> parent_nodes (time_cost_matrix.size(), 0);
 
     time_distances[start] = 0;
@@ -48,7 +48,7 @@ vector<float> dijkstra_search(vector<vector<float>>& time_cost_matrix, int start
 
         for (int v = 0; v < time_cost_matrix.size(); v++) {
             if (visited[v] == false && (time_distances[u] + time_cost_matrix[u][v]) <
-            time_distances[v] && time_cost_matrix[u][v] != 999.0) {
+            time_distances[v] && time_cost_matrix[u][v] != max_fill_value) {
                 parent_nodes[v] = u;
                 time_distances[v] = time_distances[u] + time_cost_matrix[u][v];
             }
