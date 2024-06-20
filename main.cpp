@@ -19,7 +19,7 @@ float round(float var, int n) {
 }
 
 // Функция вычисления индекса ближайшего непосещенного соседа для поиска Дийкстры
-int get_closest_neighbour(vector<float> time_distances, vector<bool> visited) {
+int get_closest_neighbour(vector<float>& time_distances, vector<bool>& visited) {
 
     int ind = 0;
     float min = max_fill_value;
