@@ -7,7 +7,7 @@ using namespace std;
 int speed = 2;
 int seconds_to_load = 10;
 int start_ind = 0;
-int max_fill_value = 999;
+int max_fill_value = 10000;
 
 // Функция округления дробного числа var до n чисел после запятой
 float round(float var, int n) {
