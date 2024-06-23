@@ -3,4 +3,4 @@ project(SimplePlanner)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(SimplePlanner main.cpp)
+add_executable(SimplePlanner main1.cpp CostMatrix.cpp CostMatrix.h utils.cpp utils.h planners.cpp planners.h main.cpp PFPF.h)
