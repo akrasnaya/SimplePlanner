@@ -1,11 +1,14 @@
 #include "iostream"
 #include "vector"
-#include "CostMatrix.h"
-#include "planners.h"
-#include "utils.h"
+#include "fstream"
+#include "../include/json.hpp"
+#include "../include/CostMatrix.h"
+#include "../include/planners.h"
+#include "../include/utils.h"
 
 using namespace utils;
 using namespace planners;
+using json = nlohmann::json;
 
 
 /**
@@ -26,20 +29,22 @@ float calculate_min_time(std::vector<std::vector<int>>& points, int start) {
 
 
 int main() {
+    std::ifstream f("../config.json");
+    json config_data = json::parse(f);
     int N;
     std::cin >> N;
     while (N != 0) {
         std::vector<std::vector<int>> points;
         for (int i = 0; i < N; i++) {
             std::vector<int> point;
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < config_data.at("num_of_point_params"); j++) {
                 int num;
                 std::cin >> num;
                 point.push_back(num);
             }
             points.push_back(point);
         }
-        float min_time = calculate_min_time(points, 0);
+        float min_time = calculate_min_time(points, config_data.at("start_inds"));
         std::cout << min_time << std::endl;
         std::cin >> N;
     }

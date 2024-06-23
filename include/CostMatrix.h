@@ -6,18 +6,26 @@
 
 #include "utils.h"
 #include "vector"
+#include "fstream"
+#include "json.hpp"
 
 using namespace utils;
+using json = nlohmann::json;
 
 /**
  * Реализация матрицы эвристик для алгоритмов поиска/планирования
  */
 
+
+// Загрузка необходимых полей из config
+std::ifstream f("../config.json");
+json config_data = json::parse(f);
+
 class CostMatrix{
 protected:
-    int speed = 2;
-    int seconds_to_load = 10;
-    int max_fill_value = 10000;
+    int speed = config_data.at("speed");
+    int seconds_to_load = config_data.at("seconds_to_load");
+    int max_fill_value = config_data.at("max_fill_value");
 
 public:
     std::vector<std::vector<int>> route;
