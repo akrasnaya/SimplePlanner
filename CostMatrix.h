@@ -9,6 +9,10 @@
 
 using namespace utils;
 
+/**
+ * Реализация матрицы эвристик для алгоритмов поиска/планирования
+ */
+
 class CostMatrix{
 protected:
     int speed = 2;
@@ -17,14 +21,17 @@ protected:
 
 public:
     std::vector<std::vector<int>> route;
-    std::vector<std::vector<float>> cost_matrix;
+    std::vector<std::vector<float>> cost_matrix; //
     CostMatrix(std::vector<std::vector<int>> a) {
-        route = a;
+        route = a; //единственное поле для конструктора - маршрут робота в виде списка точек
     }
 
 
-    // Функция для подсчета времени от каждой вершины до конца маршрута с учетом времени загрузки и штрафов
-    // Возвращает матрицу стоимости по времени
+    /**
+    * Функция для подсчета эвристики по времени с учетом параметров задачи и штрафов
+    *
+    * @param[out] двумерная матрица стоимости по времени
+    */
     std::vector<std::vector<float>> create_time_cost_matrix() {
         std::vector<std::vector<float>> time_graph (route.size(), std::vector<float> (route.size()));
         for (int i = 0; i < route.size(); i++) {

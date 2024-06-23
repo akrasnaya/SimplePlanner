@@ -7,7 +7,14 @@
 using namespace utils;
 using namespace planners;
 
-// Функция, возвращающая итоговое минимальное значение от точки с индексом start до конца маршрута
+
+/**
+    * Функция, возвращающая итоговое минимальное значение от точки с индексом start до конца маршрута
+    *
+    * @param[out] минимальное значение от точки с индексом start до конца маршрута
+    * @param[in] points - список точек, введенных с stdin
+    * @param[in] start - индекс точки, начиная с которой необходимо построить кратчайший маршрут
+    */
 float calculate_min_time(std::vector<std::vector<int>>& points, int start) {
 
         std::vector<std::vector<int>> route = planners::create_route(points);

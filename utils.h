@@ -9,7 +9,13 @@
 
 
 namespace utils {
-    // Функция округления дробного числа var до n чисел после запятой
+    /**
+    * Функция округления дробного числа var до n чисел после запятой
+    *
+    * @param[out] округленное дробное числа var до n чисел после запятой
+    * @param[in] var - дробное число
+    * @param[in] n - количество цифр после запятой
+    */
     float round(float var, int n) {
 
         int util_num = std::pow(10, n);
@@ -18,7 +24,14 @@ namespace utils {
     }
 
 
-// Функция для вычисления времени на проезд по прямой между двумя точками
+    /**
+    * Функция для вычисления времени на проезд по прямой между двумя точками point1 и point2 со скоростью speed
+    *
+    * @param[out] время на проезд по прямой между двумя точками point1 и point2 со скоростью speed
+    * @param[in] point1 - начальная точка
+    * @param[in] point2 - конечная точка
+    * @param[in] speed - скорость робота
+    */
     float time_dist(std::vector<int> point1, std::vector<int> point2, float speed) {
 
         float dist = ::sqrt(::pow((point2[0] - point1[0]), 2) + ::pow((point2[1] - point1[1]), 2));
