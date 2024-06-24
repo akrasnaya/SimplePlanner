@@ -19,7 +19,7 @@ using namespace std::chrono;
     * @param[in] points - список точек, введенных с stdin
     * @param[in] start - индекс точки, начиная с которой необходимо построить кратчайший маршрут
     */
-float calculate_min_time(std::vector<std::array<int, 3>>& points, int start) {
+float calculate_min_time(std::vector<std::array<int, 3>> points, int start) {
 
         std::vector<std::array<int, 3>> route = planners::create_route(points);
         CostMatrix time_heuristic(route);
