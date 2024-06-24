@@ -8,6 +8,7 @@
 #include "vector"
 #include "fstream"
 #include "json.hpp"
+#include "array"
 
 using namespace utils;
 using json = nlohmann::json;
@@ -28,9 +29,9 @@ protected:
     int max_fill_value = config_data.at("max_fill_value");
 
 public:
-    std::vector<std::vector<int>> route;
+    std::vector<std::array<int, 3>> route;
     std::vector<std::vector<float>> cost_matrix; //
-    CostMatrix(std::vector<std::vector<int>> a) {
+    CostMatrix(std::vector<std::array<int, 3>> a) {
         route = a; //единственное поле для конструктора - маршрут робота в виде списка точек
     }
 
