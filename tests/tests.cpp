@@ -26,8 +26,9 @@ float calculate_min_time(std::vector<std::vector<int>>& points, int start) {
 }
 
 void test_planner() {
-    assert(calculate_min_time({{50, 50, 20}}) == 90.711);
-    assert(calculate_min_time({{30, 30, 90}, {60, 60, 80}, {10, 90, 100}}) == 156.858);
-    assert(calculate_min_time({{30, 30, 90}, {60, 60, 80}, {10, 90, 10}}) == 110.711);
+    int start_ind = 0;
+    assert(calculate_min_time({{50, 50, 20}}, start_ind) == 90.711);
+    assert(calculate_min_time({{30, 30, 90}, {60, 60, 80}, {10, 90, 100}}, start_ind) == 156.858);
+    assert(calculate_min_time({{30, 30, 90}, {60, 60, 80}, {10, 90, 10}}, start_ind) == 110.711);
 
 };
