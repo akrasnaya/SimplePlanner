@@ -6,6 +6,7 @@
 
 #include "vector"
 #include "cmath"
+#include "array"
 
 
 namespace utils {
@@ -32,7 +33,7 @@ namespace utils {
     * @param[in] point2 - конечная точка
     * @param[in] speed - скорость робота
     */
-    float time_dist(std::vector<int> point1, std::vector<int> point2, float speed) {
+    float time_dist(std::array<int, 3> point1, std::array<int, 3> point2, float speed) {
 
         float dist = ::sqrt(::pow((point2[0] - point1[0]), 2) + ::pow((point2[1] - point1[1]), 2));
         return dist / speed;

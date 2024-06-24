@@ -3,6 +3,5 @@
   "seconds_to_load": 10,
   "max_fill_value": 10000,
   "field_size": 100,
-  "start_inds": 0,
-  "num_of_point_params": 3
+  "start_inds": 0
 }

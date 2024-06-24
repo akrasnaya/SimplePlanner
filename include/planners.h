@@ -1,10 +1,9 @@
-//
-// Created by Анастасия Красная on 23.06.2024.
-//
 #include "fstream"
-#include "json.hpp"
 #include "vector"
-#include "CostMatrix.h"
+#include "array"
+
+#include "../include/json.hpp"
+
 
 using json = nlohmann::json;
 // Загрузка необходимых полей из config
@@ -24,16 +23,18 @@ namespace planners {
     * @param[out] route - список всех точек маршрута, включая начало и конец
     * @param[in] points - список точек, введенных с stdin
     */
-    std::vector<std::vector<int>> create_route(std::vector<std::vector<int>>& points) {
+    std::vector<std::array<int, 3>> create_route(std::vector<std::array<int, 3>>& points) {
 
-        std::vector<int> start = {0, 0, 0};
-        std::vector<int> finish = {field_size, field_size, 0};
-        std::vector<std::vector<int>> route;
-
+        std::array<int, 3> start = {0, 0, 0};
+        std::array<int, 3> finish = {field_size, field_size, 0};
+        std::vector<std::array<int, 3>> route;
+        route.reserve(points.size() + 2);
         route.push_back(start);
+
         for (auto point: points) {
             route.push_back(point);
         }
+
         route.push_back(finish);
 
         return route;
@@ -46,7 +47,7 @@ namespace planners {
     * @param[in] distance vector - список расстояний от начальной точки поиска до всех остальных
     * @param[in] visited - список посещенных точек в графе
     */
-    int get_closest_neighbour(std::vector<float>& distance_vector, std::vector<bool>& visited) {
+    int get_closest_neighbour(std::vector<float> distance_vector, std::vector<bool> visited) {
 
         int ind = 0;
         float min = max_fill_value;
@@ -67,7 +68,7 @@ namespace planners {
     * @param[in] cost_matrix - двумерная заполненная матрица эвристик
     * @param[in] start - индекс точки маршрута, с которой начинается поиск
     */
-    std::vector<float> dijkstra_search(std::vector<std::vector<float>> cost_matrix, int start) {
+    std::vector<float> dijkstra_search(std::vector<std::vector<float>>& cost_matrix, int start) {
 
 
         std::vector<bool> visited (cost_matrix.size(), false);
@@ -78,12 +79,13 @@ namespace planners {
         parent_nodes[start] = -1;
 
         for (int g = 0; g < cost_matrix.size() - 1; g++) {
+
             int u = get_closest_neighbour(distance_vector, visited);
             visited[u]= true;
 
             for (int v = 0; v < cost_matrix.size(); v++) {
                 if (visited[v] == false && (distance_vector[u] + cost_matrix[u][v]) <
-                                                   distance_vector[v] && cost_matrix[u][v] != max_fill_value) {
+                                           distance_vector[v] && cost_matrix[u][v] != max_fill_value) {
                     parent_nodes[v] = u;
                     distance_vector[v] = distance_vector[u] + cost_matrix[u][v];
                 }
@@ -94,4 +96,6 @@ namespace planners {
     }
 
 }
+
+
 
