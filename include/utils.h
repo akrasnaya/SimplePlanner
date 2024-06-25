@@ -10,6 +10,18 @@
 
 
 namespace utils {
+
+    /**
+    * Структура для хранения конфига
+    */
+    struct config {
+        int max_fill_value;
+        int field_size;
+        int speed;
+        int seconds_to_load;
+        int start_ind;
+    };
+
     /**
     * Функция округления дробного числа var до n чисел после запятой
     *

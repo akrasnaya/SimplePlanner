@@ -1,20 +1,11 @@
-#include "fstream"
 #include "vector"
 #include "array"
 
-#include "../include/json.hpp"
-
-
-using json = nlohmann::json;
-// Загрузка необходимых полей из config
-
 
 namespace planners {
-    std::ifstream f("../config.json");
-    json config_data = json::parse(f);
 
-    int max_fill_value = config_data.at("max_fill_value");;     //величина максимального значения для заполнения
-    int field_size = config_data.at("field_size");;           //размер поля
+    int max_fill_value;
+    int field_size;
 
 
     /**
