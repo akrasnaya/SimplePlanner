@@ -15,7 +15,7 @@ using json = nlohmann::json;
     * Метод, который парсит json-config во внутреннюю структуру конфига utils::config и устанавливает параметры для
     * планеров
     *
-    * @param[in] task_config - список точек, введенных с stdin
+    * @param[in] task_config - пустая структура
     */
 void set_params(utils::config& task_config) {
     std::ifstream f("../config.json");
