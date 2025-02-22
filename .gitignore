@@ -1,0 +1,45 @@
+# Ignore build directories
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/Makefile
+/*.cmake
+
+# Ignore Qt specific files
+*.pro.user
+*.qmake.stash
+
+# Ignore temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+
+# Ignore compiled object files
+*.o
+*.obj
+*.lo
+*.la
+*.al
+*.libs
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Ignore generated files
+*.moc
+*.qrc
+*.rcc
+*.ui
+
+# Ignore configuration files
+config.json
+
+# Ignore other IDE specific files
+.idea/
+.vscode/
+*.iml
+
+# Ignore macOS specific files
+.DS_Store 
