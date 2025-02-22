@@ -1,11 +1,9 @@
-#include "vector"
-#include "array"
-
+#include "../include/planners.h"
+#include <Eigen/Dense>
+#include <vector>
+#include <array>
 
 namespace planners {
-
-    int max_fill_value;
-    int field_size;
 
 
     /**
@@ -14,19 +12,19 @@ namespace planners {
     * @param[out] route - список всех точек маршрута, включая начало и конец
     * @param[in] points - список точек, введенных с stdin
     */
-    std::vector<std::array<int, 3>> create_route(std::vector<std::array<int, 3>>& points) {
+    std::vector<Eigen::Vector3i> create_route(const std::vector<Eigen::Vector3i>& points) {
 
-        std::array<int, 3> start = {0, 0, 0};
-        std::array<int, 3> finish = {field_size, field_size, 0};
-        std::vector<std::array<int, 3>> route;
+        Eigen::Vector3i start = {0, 0, 0};
+        Eigen::Vector3i finish = {field_size, field_size, 0};
+        std::vector<Eigen::Vector3i> route;
         route.reserve(points.size() + 2);
-        route.push_back(start);
+        route.emplace_back(start);
 
         for (auto point: points) {
-            route.push_back(point);
+            route.emplace_back(point);
         }
 
-        route.push_back(finish);
+        route.emplace_back(finish);
 
         return route;
     }
@@ -59,26 +57,25 @@ namespace planners {
     * @param[in] cost_matrix - двумерная заполненная матрица эвристик
     * @param[in] start - индекс точки маршрута, с которой начинается поиск
     */
-    std::vector<float> dijkstra_search(std::vector<std::vector<float>>& cost_matrix, int start) {
+    std::vector<float> dijkstra_search(Eigen::MatrixXf& cost_matrix, int start) {
 
-
-        std::vector<bool> visited (cost_matrix.size(), false);
-        std::vector<float> distance_vector (cost_matrix.size(), max_fill_value);
-        std::vector<int> parent_nodes (cost_matrix.size(), 0);
+        std::vector<bool> visited (cost_matrix.rows(), false);
+        std::vector<float> distance_vector (cost_matrix.rows(), max_fill_value);
+        std::vector<int> parent_nodes (cost_matrix.rows(), 0);
 
         distance_vector[start] = 0;
         parent_nodes[start] = -1;
 
-        for (int g = 0; g < cost_matrix.size() - 1; g++) {
+        for (int g = 0; g < cost_matrix.rows() - 1; g++) {
 
             int u = get_closest_neighbour(distance_vector, visited);
             visited[u]= true;
 
-            for (int v = 0; v < cost_matrix.size(); v++) {
-                if (visited[v] == false && (distance_vector[u] + cost_matrix[u][v]) <
-                                           distance_vector[v] && cost_matrix[u][v] != max_fill_value) {
+            for (int v = 0; v < cost_matrix.rows(); v++) {
+                if (visited[v] == false && (distance_vector[u] + cost_matrix(u, v)) <
+                                           distance_vector[v] && cost_matrix(u, v) != max_fill_value) {
                     parent_nodes[v] = u;
-                    distance_vector[v] = distance_vector[u] + cost_matrix[u][v];
+                    distance_vector[v] = distance_vector[u] + cost_matrix(u, v);
                 }
             }
 
