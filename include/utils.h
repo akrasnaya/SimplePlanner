@@ -7,7 +7,7 @@
 #include "vector"
 #include "cmath"
 #include "array"
-
+#include <Eigen/Dense>
 
 namespace utils {
 
@@ -29,12 +29,7 @@ namespace utils {
     * @param[in] var - дробное число
     * @param[in] n - количество цифр после запятой
     */
-    float round(float var, int n) {
-
-        int util_num = std::pow(10, n);
-        float value = (int)(var * util_num + .5);
-        return (float)value / util_num;
-    }
+    float round(float var, int n);
 
 
     /**
@@ -45,11 +40,7 @@ namespace utils {
     * @param[in] point2 - конечная точка
     * @param[in] speed - скорость робота
     */
-    float time_dist(std::array<int, 3> point1, std::array<int, 3> point2, float speed) {
-
-        float dist = ::sqrt(::pow((point2[0] - point1[0]), 2) + ::pow((point2[1] - point1[1]), 2));
-        return dist / speed;
-    }
+    float time_dist(const Eigen::Vector3i& point1, const Eigen::Vector3i& point2, float speed);
 }
 
 #endif

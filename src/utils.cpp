@@ -1,23 +1,12 @@
 //
 // Created by Анастасия Красная on 23.06.2024.
 //
-
+#include "../include/utils.h"
 #include "vector"
 #include "cmath"
-
+#include <Eigen/Dense>
 
 namespace utils {
-
-    /**
-    * Структура для хранения конфига
-    */
-    struct config {
-        int max_fill_value;
-        int field_size;
-        int speed;
-        int seconds_to_load;
-        int start_ind;
-    };
 
     /**
     * Функция округления дробного числа var до n чисел после запятой
@@ -42,9 +31,9 @@ namespace utils {
     * @param[in] point2 - конечная точка
     * @param[in] speed - скорость робота
     */
-    float time_dist(std::vector<int> point1, std::vector<int> point2, float speed) {
+    float time_dist(const Eigen::Vector3i& point1, const Eigen::Vector3i& point2, float speed) {
 
-        float dist = ::sqrt(::pow((point2[0] - point1[0]), 2) + ::pow((point2[1] - point1[1]), 2));
+        float dist = (point2 - point1).norm();
         return dist / speed;
     }
 }
